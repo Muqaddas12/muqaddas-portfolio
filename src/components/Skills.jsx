@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import {
   FaReact,
   FaNode,
@@ -9,7 +12,15 @@ import {
   FaGitAlt,
 } from "react-icons/fa";
 
-import { SiC, SiCplusplus, SiFirebase, SiMysql, SiPostman, SiKotlin, SiRedux } from "react-icons/si";
+import {
+  SiC,
+  SiCplusplus,
+  SiFirebase,
+  SiMysql,
+  SiPostman,
+  SiKotlin,
+  SiRedux,
+} from "react-icons/si";
 
 const skills = [
   { name: "C", icon: <SiC className="text-blue-400 text-3xl" /> },
@@ -32,14 +43,28 @@ const skills = [
 ];
 
 const Skills = () => {
+  useEffect(() => {
+  AOS.init({
+    duration: 800,
+    once: false,
+    mirror: true,
+  });
+}, []);
+
   return (
-    <section id="skills" className="text-center py-16 px-6 max-w-5xl mx-auto">
+    <section
+      id="skills"
+      className="text-center py-16 px-6 max-w-5xl mx-auto"
+      data-aos="fade-up"
+    >
       <h2 className="text-3xl font-bold text-yellow-300 mb-6">Skills</h2>
       <div className="flex flex-wrap justify-center gap-10">
         {skills.map((skill, idx) => (
           <div
             key={idx}
             className="flex flex-col items-center transition-transform hover:scale-110"
+            data-aos="zoom-in"
+            data-aos-delay={idx * 50}
           >
             {skill.icon}
             <span className="mt-2 text-slate-200 text-sm">{skill.name}</span>

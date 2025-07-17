@@ -13,10 +13,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        {/* Uncomment when ready:
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-        */}
+       
       </Routes>
     </Router>
   </StrictMode>

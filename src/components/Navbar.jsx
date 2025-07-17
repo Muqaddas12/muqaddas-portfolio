@@ -1,54 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-scroll";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
+
+const navItems = [
+  { name: "Home", to: "hero" },
+  { name: "About", to: "about" },
+  { name: "Skills", to: "skills" },
+  { name: "Projects", to: "projects" },
+  { name: "Education", to: "education" },
+  { name: "Achievements", to: "achievements" },
+];
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(true);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
-
-  const navItems = [
-    { label: "Home", to: "hero" },
-    { label: "About", to: "about" },
-    { label: "Skills", to: "skills" },
-    { label: "Projects", to: "projects" },
-    { label: "Education", to: "education" },
-    { label: "Achievements", to: "achievements" },
-  ];
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-indigo-900/80 backdrop-blur text-white shadow-md">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <h1 className="text-xl font-bold tracking-wider">Muqaddas</h1>
-        <nav className="flex items-center gap-6">
-          {navItems.map((item) => (
+    <nav className="fixed top-0 left-0 w-full bg-slate-900/90 backdrop-blur z-50 shadow-md">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center text-white">
+        <h1 className="text-xl font-bold text-yellow-300">Muqaddas Malik</h1>
+        <div className="hidden md:flex space-x-6">
+          {navItems.map((item, idx) => (
             <Link
-              key={item.to}
+              key={idx}
               to={item.to}
               smooth={true}
               duration={500}
               offset={-70}
-              className="cursor-pointer hover:text-yellow-300 transition text-sm md:text-base"
+              className="cursor-pointer text-sm hover:text-yellow-300 transition"
             >
-              {item.label}
+              {item.name}
             </Link>
           ))}
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="ml-2 text-yellow-300 hover:text-yellow-500 transition text-xl"
-            aria-label="Toggle Dark Mode"
-          >
-            {darkMode ? <FaSun /> : <FaMoon />}
+        </div>
+        <div className="md:hidden">
+          <button onClick={() => setOpen(!open)}>
+            {open ? <FaTimes size={22} /> : <FaBars size={22} />}
           </button>
-        </nav>
+        </div>
       </div>
-    </header>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden bg-slate-800 px-6 py-4 space-y-4">
+          {navItems.map((item, idx) => (
+            <Link
+              key={idx}
+              to={item.to}
+              smooth={true}
+              duration={500}
+              offset={-70}
+              className="block text-sm hover:text-yellow-300 cursor-pointer"
+              onClick={() => setOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 };
 
