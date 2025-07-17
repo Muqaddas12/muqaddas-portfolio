@@ -1,12 +1,13 @@
 {
   "name": "Muqaddas Malik Portfolio",
   "short_name": "Muqaddas",
-  "description": "Muqaddas Malik's personal portfolio website showcasing full-stack projects, skills, achievements, and contact info.",
-  "start_url": "/",
+  "description": "Muqaddas Malik's personal portfolio showcasing projects, skills, education, certifications, and contact details.",
+  "start_url": "https://muqaddas-portfolio-zeta.vercel.app/",
+  "scope": "https://muqaddas-portfolio-zeta.vercel.app/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#0f172a",
   "theme_color": "#1e1b4b",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "/fav.svg",
