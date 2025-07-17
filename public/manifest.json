@@ -1,0 +1,27 @@
+{
+  "name": "Muqaddas Malik Portfolio",
+  "short_name": "Muqaddas",
+  "description": "Muqaddas Malik's personal portfolio website showcasing full-stack projects, skills, achievements, and contact info.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e1b4b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/fav.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

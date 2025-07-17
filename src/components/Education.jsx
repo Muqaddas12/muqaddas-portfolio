@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const educationData = [
   {
@@ -16,20 +18,38 @@ const educationData = [
 ];
 
 const Education = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
   return (
-    <section id="education" className="max-w-4xl mx-auto py-16 px-6 text-white">
-      <h2 className="text-3xl font-bold text-yellow-300 mb-10 text-center">Education</h2>
-      <div className="space-y-6">
+    <section
+      id="education"
+      className="max-w-5xl mx-auto py-20 px-6 text-white"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-yellow-300 mb-12 text-center relative inline-block">
+        Education
+        <span className="block w-24 h-1 bg-yellow-400 mx-auto mt-2 rounded-full animate-pulse" />
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-8">
         {educationData.map((edu, idx) => (
           <div
             key={idx}
-            className="bg-slate-800 rounded-lg p-6 shadow-md hover:shadow-yellow-400/10 transition-transform transform hover:scale-105"
+            data-aos="fade-up"
+            data-aos-delay={idx * 100}
+            className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-transform transform hover:scale-105"
           >
-            <h3 className="text-xl font-semibold text-yellow-200">{edu.degree}</h3>
+            <h3 className="text-xl font-semibold text-yellow-200 mb-2">
+              {edu.degree}
+            </h3>
             <p className="text-slate-300">{edu.institution}</p>
             <p className="text-slate-400 text-sm">{edu.duration}</p>
             <p className="text-slate-400 text-sm mt-1">
-              {edu.cgpa !== "Ongoing" ? `CGPA: ${edu.cgpa}` : "CGPA: In Progress"}
+              CGPA:{" "}
+              <span className="text-white font-medium">
+                {edu.cgpa !== "Ongoing" ? edu.cgpa : "In Progress"}
+              </span>
             </p>
           </div>
         ))}

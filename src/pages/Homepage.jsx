@@ -8,6 +8,7 @@ import Education from "../components/Education";
 import Achievements from "../components/Achievements";
 import Footer from "../components/Footer";
 import DarkModeToggle from "../components/DarkModeToggle";
+import Contact from "../components/Contact";
 
 const Homepage = () => {
   return (
@@ -23,6 +24,7 @@ const Homepage = () => {
       <Projects />
       <Education />
       <Achievements />
+      <Contact/>
       <Footer />
     </div>
   );
