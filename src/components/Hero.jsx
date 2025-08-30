@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 import { TypeAnimation } from "react-type-animation";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";

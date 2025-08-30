@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 
 const certifications = [
   "TryHackMe – Beginner to Intermediate Labs (Privilege Escalation, CTFs)",

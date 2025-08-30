@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client"
+import { useState } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
 
 const Footer = () => {

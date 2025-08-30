@@ -1,8 +1,8 @@
-import React from "react";
+"use client"
 
 const fallbackImg =
-  "https://cdn-icons-png.flaticon.com/512/833/833281.png"; // generic placeholder
-
+  "https://cdn-icons-png.flaticon.com/512/833/833281.png";
+  
 const categorizedProjects = {
   "Mobile Apps": [
     {

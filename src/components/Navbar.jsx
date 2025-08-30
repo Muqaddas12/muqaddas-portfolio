@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+"use client"
+import { useState, useEffect } from "react";
 import { Link as ScrollLink, Events } from "react-scroll";
 import { FaBars, FaTimes } from "react-icons/fa";
 
