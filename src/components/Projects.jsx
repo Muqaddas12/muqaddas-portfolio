@@ -2,7 +2,7 @@
 
 const fallbackImg =
   "https://cdn-icons-png.flaticon.com/512/833/833281.png";
-  
+
 const categorizedProjects = {
   "Mobile Apps": [
     {
@@ -144,3 +144,4 @@ const Projects = () => {
 };
 
 export default Projects;
+ 
