@@ -1,25 +1,46 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const DarkModeToggle = () => {
-  const [dark, setDark] = useState(() =>
-    localStorage.getItem("theme") === "dark"
-  );
+  const [dark, setDark] = useState(false); // default false until mounted
+  const [mounted, setMounted] = useState(false);
 
+  // Run only on client
   useEffect(() => {
-    const root = document.documentElement;
-    if (dark) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setDark(true);
+      document.documentElement.classList.add("dark");
     } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      setDark(false);
+      document.documentElement.classList.remove("dark");
     }
-  }, [dark]);
+    setMounted(true); // component is now safe to render
+  }, []);
+
+  // Toggle theme
+  const toggleTheme = () => {
+    setDark((prev) => {
+      const newTheme = !prev ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+
+      if (newTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      return !prev;
+    });
+  };
+
+  // Avoid hydration mismatch
+  if (!mounted) return null;
 
   return (
     <button
-      onClick={() => setDark(!dark)}
+      onClick={toggleTheme}
       className="fixed top-4 right-4 bg-white dark:bg-slate-700 text-slate-900 dark:text-yellow-300 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50"
       aria-label="Toggle Dark Mode"
     >

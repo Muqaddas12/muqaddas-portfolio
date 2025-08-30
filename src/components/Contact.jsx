@@ -1,7 +1,39 @@
+"use client";
 import React, { useState } from "react";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // prevent reload
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData(e.target);
+
+    try {
+      const res = await fetch("https://formspree.io/f/xvgqypag", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        e.target.reset(); // clear form after success
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("Network error. Please try again.");
+    }
+
+    setLoading(false);
+  };
 
   return (
     <section
@@ -22,9 +54,7 @@ const Contact = () => {
         </div>
       ) : (
         <form
-          onSubmit={() => setSubmitted(true)}
-          action="https://formspree.io/f/your-form-id" // 🔁 Replace with your actual Formspree ID
-          method="POST"
+          onSubmit={handleSubmit}
           className="bg-slate-800 p-6 rounded-lg shadow-lg space-y-6 animate-fade-in"
         >
           <div>
@@ -57,11 +87,16 @@ const Contact = () => {
             ></textarea>
           </div>
 
+          {error && (
+            <p className="text-red-400 text-sm text-center">{error}</p>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-yellow-400 text-black font-semibold py-2 rounded hover:bg-yellow-300 transition"
+            disabled={loading}
+            className="w-full bg-yellow-400 text-black font-semibold py-2 rounded hover:bg-yellow-300 transition disabled:opacity-50"
           >
-            ✉️ Send Message
+            {loading ? "⏳ Sending..." : "✉️ Send Message"}
           </button>
         </form>
       )}
