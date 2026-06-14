@@ -1,40 +1,31 @@
-"use client"
+"use client";
 
-const certifications = [
-  "TryHackMe – Beginner to Intermediate Labs (Privilege Escalation, CTFs)",
-  "HackTheBox – Virtual Penetration Labs (Shells, Vulnerability Discovery)",
-  "Coursera – Foundations of UI/UX Design (Google)",
-  "Coursera – Introduction to Front-End Development (Meta)",
-  "Coursera – Java Programming and Software Engineering (Duke University)",
-];
+import { motion } from "framer-motion";
+import { certifications } from "./portfolioData";
 
 const Achievements = () => {
   return (
-    <section
-      id="achievements"
-      className="max-w-5xl mx-auto py-16 px-6 text-white"
-      data-aos="fade-up"
-      data-aos-once="false"
-    >
-      <h2 className="text-3xl font-bold text-yellow-300 mb-10 text-center">
-        Certifications & Achievements
-      </h2>
+    <section id="achievements" className="section-shell">
+      <div className="grid gap-8 rounded-lg border border-white/10 bg-[#0b1720] p-6 md:grid-cols-[0.75fr_1.25fr] md:p-8">
+        <div>
+          <p className="section-kicker">Proof of learning</p>
+          <h2 className="section-title">Certifications and practice areas.</h2>
+        </div>
 
-      <div
-        className="bg-slate-800 p-6 rounded-xl shadow-md hover:shadow-yellow-300/10 transition duration-300"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        <h3 className="text-2xl text-yellow-200 font-semibold mb-4">
-          Top Certifications
-        </h3>
-        <ul className="list-disc list-inside space-y-3 text-slate-300 pl-4">
-          {certifications.map((cert, idx) => (
-            <li key={idx} className="hover:text-yellow-100 transition duration-150">
+        <div className="grid gap-3">
+          {certifications.map((cert, index) => (
+            <motion.div
+              key={cert}
+              initial={{ opacity: 0, x: 18 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+              className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-4 text-sm text-slate-300"
+            >
               {cert}
-            </li>
+            </motion.div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

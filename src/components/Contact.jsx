@@ -1,105 +1,151 @@
 "use client";
+
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { FaEnvelope, FaGithub, FaLinkedinIn, FaPaperPlane } from "react-icons/fa";
+import { profile } from "./portfolioData";
+
+const contactLinks = [
+  { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: <FaEnvelope /> },
+  { label: "GitHub", value: "github.com/Muqaddas12", href: profile.github, icon: <FaGithub /> },
+  { label: "LinkedIn", value: "muqaddas-malik", href: profile.linkedin, icon: <FaLinkedinIn /> },
+];
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // prevent reload
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
     setError("");
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(event.target);
 
     try {
-      const res = await fetch("https://formspree.io/f/xvgqypag", {
+      const response = await fetch("https://formspree.io/f/xvgqypag", {
         method: "POST",
         body: formData,
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
 
-      if (res.ok) {
-        setSubmitted(true);
-        e.target.reset(); // clear form after success
-      } else {
-        setError("Something went wrong. Please try again.");
+      if (!response.ok) {
+        throw new Error("Form submission failed");
       }
-    } catch (err) {
-      setError("Network error. Please try again.");
-    }
 
-    setLoading(false);
+      setSubmitted(true);
+      event.target.reset();
+    } catch {
+      setError("Message could not be sent. Please email me directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section
-      id="contact"
-      className="max-w-4xl mx-auto py-16 px-6 text-white"
-      data-aos="fade-up"
-    >
-      <h2 className="text-4xl font-bold text-yellow-300 mb-6 text-center font-serif">
-        🚀 Let's Connect
-      </h2>
-      <p className="text-center text-slate-300 mb-10">
-        Have a question, idea, or opportunity? Drop me a message below!
-      </p>
-
-      {submitted ? (
-        <div className="bg-green-600/20 border border-green-400 text-green-300 p-5 rounded-lg text-center animate-fade-in">
-          ✅ Your message has been sent! I’ll get back to you shortly.
-        </div>
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="bg-slate-800 p-6 rounded-lg shadow-lg space-y-6 animate-fade-in"
+    <section id="contact" className="section-shell pb-24">
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
         >
-          <div>
-            <label className="block text-slate-200 mb-1">Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              className="w-full px-4 py-2 rounded bg-slate-700 text-white border border-slate-600 focus:outline-none focus:border-yellow-400"
-            />
-          </div>
+          <p className="section-kicker">Contact</p>
+          <h2 className="section-title">Have a project, role, or idea?</h2>
+          <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+            Send a short message and I will reply as soon as possible. You can
+            also reach me directly through email, GitHub, or LinkedIn.
+          </p>
 
-          <div>
-            <label className="block text-slate-200 mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="w-full px-4 py-2 rounded bg-slate-700 text-white border border-slate-600 focus:outline-none focus:border-yellow-400"
-            />
+          <div className="mt-8 grid gap-3">
+            {contactLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-300/35 hover:bg-white/[0.07]"
+              >
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-300/12 text-cyan-200">
+                  {link.icon}
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-white">{link.label}</span>
+                  <span className="text-sm text-slate-400">{link.value}</span>
+                </span>
+              </a>
+            ))}
           </div>
+        </motion.div>
 
-          <div>
-            <label className="block text-slate-200 mb-1">Message</label>
-            <textarea
-              name="message"
-              rows="5"
-              required
-              className="w-full px-4 py-2 rounded bg-slate-700 text-white border border-slate-600 focus:outline-none focus:border-yellow-400"
-            ></textarea>
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.08 }}
+          className="rounded-lg border border-white/10 bg-[#0b1720] p-6 md:p-8"
+        >
+          {submitted ? (
+            <div className="rounded-lg border border-emerald-300/25 bg-emerald-300/10 p-5 text-emerald-100">
+              Your message has been sent. Thank you for reaching out.
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="text-sm font-semibold text-slate-200" htmlFor="name">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  required
+                  className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/50"
+                />
+              </div>
 
-          {error && (
-            <p className="text-red-400 text-sm text-center">{error}</p>
+              <div>
+                <label className="text-sm font-semibold text-slate-200" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  required
+                  className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/50"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-semibold text-slate-200" htmlFor="message">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  className="mt-2 w-full resize-none rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan-300/50"
+                />
+              </div>
+
+              {error && <p className="text-sm text-red-300">{error}</p>}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex w-full items-center justify-center gap-3 rounded-lg bg-white px-5 py-3 font-bold text-[#071018] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <FaPaperPlane />
+                {loading ? "Sending..." : "Send message"}
+              </button>
+            </form>
           )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-yellow-400 text-black font-semibold py-2 rounded hover:bg-yellow-300 transition disabled:opacity-50"
-          >
-            {loading ? "⏳ Sending..." : "✉️ Send Message"}
-          </button>
-        </form>
-      )}
+        </motion.div>
+      </div>
     </section>
   );
 };

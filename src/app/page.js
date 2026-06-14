@@ -1,33 +1,28 @@
-'use client'
-import React from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
+import InterviewFlow from "../components/InterviewFlow";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Education from "../components/Education";
 import Achievements from "../components/Achievements";
-import Footer from "../components/Footer";
-import DarkModeToggle from "../components/DarkModeToggle";
 import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white  scroll-smooth relative">
-      {/* 🔘 Dark Mode Toggle Button */}
-      <DarkModeToggle />
-
-      {/* 🧭 Content Sections */}
+    <main className="min-h-screen overflow-hidden bg-[#071018] text-white">
       <Navbar />
       <Hero />
       <About />
+      <InterviewFlow />
       <Skills />
       <Projects />
       <Education />
       <Achievements />
-      <Contact/>
+      <Contact />
       <Footer />
-    </div>
+    </main>
   );
 };
 

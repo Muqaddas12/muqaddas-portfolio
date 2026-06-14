@@ -1,75 +1,51 @@
-"use client"
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+"use client";
 
-import {
-  FaReact,
-  FaNode,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaJava,
-  FaGitAlt,
-} from "react-icons/fa";
-
-import {
-  SiC,
-  SiCplusplus,
-  SiFirebase,
-  SiMysql,
-  SiPostman,
-  SiKotlin,
-  SiRedux,
-} from "react-icons/si";
-
-const skills = [
-  { name: "C", icon: <SiC className="text-blue-400 text-3xl" /> },
-  { name: "C++", icon: <SiCplusplus className="text-blue-300 text-3xl" /> },
-  { name: "JavaScript", icon: <FaJs className="text-yellow-400 text-3xl" /> },
-  { name: "HTML", icon: <FaHtml5 className="text-orange-500 text-3xl" /> },
-  { name: "CSS", icon: <FaCss3Alt className="text-blue-400 text-3xl" /> },
-  { name: "Java (basic)", icon: <FaJava className="text-red-400 text-3xl" /> },
-  { name: "Kotlin (basic)", icon: <SiKotlin className="text-purple-400 text-3xl" /> },
-  { name: "React", icon: <FaReact className="text-cyan-400 text-3xl" /> },
-  { name: "React Native", icon: <FaReact className="text-cyan-200 text-3xl" /> },
-  { name: "Redux (learning)", icon: <SiRedux className="text-purple-300 text-3xl" /> },
-  { name: "Node.js", icon: <FaNode className="text-green-400 text-3xl" /> },
-  { name: "Express.js", icon: <FaNode className="text-green-200 text-3xl" /> },
-  { name: "EJS", icon: <span className="text-lg font-bold text-yellow-200">EJS</span> },
-  { name: "Firebase", icon: <SiFirebase className="text-yellow-400 text-3xl" /> },
-  { name: "MySQL", icon: <SiMysql className="text-sky-300 text-3xl" /> },
-  { name: "Git", icon: <FaGitAlt className="text-red-400 text-3xl" /> },
-  { name: "Postman", icon: <SiPostman className="text-orange-300 text-3xl" /> },
-];
+import { motion } from "framer-motion";
+import { skillGroups } from "./portfolioData";
 
 const Skills = () => {
-  useEffect(() => {
-  AOS.init({
-    duration: 800,
-    once: false,
-    mirror: true,
-  });
-}, []);
-
   return (
-    <section
-      id="skills"
-      className="text-center py-16 px-6 max-w-5xl mx-auto"
-      data-aos="fade-up"
-    >
-      <h2 className="text-3xl font-bold text-yellow-300 mb-6">Skills</h2>
-      <div className="flex flex-wrap justify-center gap-10">
-        {skills.map((skill, idx) => (
-          <div
-            key={idx}
-            className="flex flex-col items-center transition-transform hover:scale-110"
-            data-aos="zoom-in"
-            data-aos-delay={idx * 50}
+    <section id="skills" className="section-shell">
+      <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div>
+          <p className="section-kicker">Capabilities</p>
+          <h2 className="section-title">Tools I use to move from idea to shipped product.</h2>
+        </div>
+        <p className="max-w-xl text-sm leading-7 text-slate-400">
+          The stack is intentionally practical: modern frontend foundations,
+          backend basics, deployment-ready workflows, and enough mobile tooling
+          to build useful apps.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {skillGroups.map((group, index) => (
+          <motion.article
+            key={group.title}
+            initial={{ opacity: 0, y: 22, rotateX: -8 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: index * 0.07 }}
+            whileHover={{ y: -8 }}
+            className="rounded-lg border border-white/10 bg-[#0b1720] p-5 transition hover:border-cyan-300/30 sm:p-6"
           >
-            {skill.icon}
-            <span className="mt-2 text-slate-200 text-sm">{skill.name}</span>
-          </div>
+            <h3 className="text-lg font-bold text-white">{group.title}</h3>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {group.skills.map((skill, skillIndex) => (
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: index * 0.06 + skillIndex * 0.025 }}
+                  whileHover={{ scale: 1.06 }}
+                  className="rounded-md border border-white/10 bg-white/[0.05] px-3 py-2 text-sm text-slate-300"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.article>
         ))}
       </div>
     </section>

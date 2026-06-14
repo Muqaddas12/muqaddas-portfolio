@@ -1,26 +1,126 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #071018;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-roboto-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 16, 24, 0.92), #071018 32rem),
+    #071018;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgba(103, 232, 249, 0.28);
+  color: #ffffff;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.section-shell {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding: 4.5rem 1rem 0;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding-top: 5.5rem;
+    padding-inline: 2rem;
+  }
+}
+
+.section-kicker {
+  margin-bottom: 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #67e8f9;
+}
+
+.section-title {
+  max-width: 48rem;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.02;
+  color: #ffffff;
+}
+
+.animated-text-gradient {
+  background: linear-gradient(90deg, #67e8f9, #ffffff, #fbbf24, #67e8f9);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(180deg, black, transparent 78%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-grid {
+    animation: grid-drift 18s linear infinite;
+  }
+
+  .animated-text-gradient {
+    animation: text-shine 5s ease-in-out infinite;
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 46px 46px;
+  }
+}
+
+@keyframes text-shine {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+@media (max-width: 420px) {
+  .section-title {
+    font-size: 1.85rem;
+    line-height: 1.08;
+  }
+
+  .section-kicker {
+    font-size: 0.7rem;
+  }
 }

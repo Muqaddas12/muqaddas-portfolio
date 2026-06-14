@@ -1,58 +1,34 @@
-"use client"
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+"use client";
 
-const educationData = [
-  {
-    degree: "Master of Computer Applications (MCA)",
-    institution: "Shobhit Institute of Engineering and Technology, Meerut",
-    duration: "2023 – 2025",
-    cgpa: "Ongoing",
-  },
-  {
-    degree: "Bachelor of Computer Applications (BCA)",
-    institution: "Chaudhary Charan Singh University, Meerut",
-    duration: "2020 – 2023",
-    cgpa: "7.86 CGPA",
-  },
-];
+import { motion } from "framer-motion";
+import { education } from "./portfolioData";
 
 const Education = () => {
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
-
   return (
-    <section
-      id="education"
-      className="max-w-5xl mx-auto py-20 px-6 text-white"
-    >
-      <h2 className="text-3xl md:text-4xl font-bold text-yellow-300 mb-12 text-center relative inline-block">
-        Education
-        <span className="block w-24 h-1 bg-yellow-400 mx-auto mt-2 rounded-full animate-pulse" />
-      </h2>
+    <section id="education" className="section-shell">
+      <div className="mb-10">
+        <p className="section-kicker">Education</p>
+        <h2 className="section-title">Academic foundation with steady project practice.</h2>
+      </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {educationData.map((edu, idx) => (
-          <div
-            key={idx}
-            data-aos="fade-up"
-            data-aos-delay={idx * 100}
-            className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-transform transform hover:scale-105"
+      <div className="relative grid gap-5 md:grid-cols-2">
+        {education.map((item, index) => (
+          <motion.article
+            key={item.degree}
+            initial={{ opacity: 0, y: 22, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: index * 0.08 }}
+            whileHover={{ y: -7 }}
+            className="rounded-lg border border-white/10 bg-white/[0.045] p-5 transition hover:border-cyan-300/30 sm:p-6"
           >
-            <h3 className="text-xl font-semibold text-yellow-200 mb-2">
-              {edu.degree}
-            </h3>
-            <p className="text-slate-300">{edu.institution}</p>
-            <p className="text-slate-400 text-sm">{edu.duration}</p>
-            <p className="text-slate-400 text-sm mt-1">
-              CGPA:{" "}
-              <span className="text-white font-medium">
-                {edu.cgpa !== "Ongoing" ? edu.cgpa : "In Progress"}
-              </span>
+            <p className="text-sm font-semibold text-cyan-200">{item.duration}</p>
+            <h3 className="mt-4 text-lg font-black text-white sm:text-xl">{item.degree}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-400">{item.institution}</p>
+            <p className="mt-5 inline-flex rounded-md bg-white/[0.06] px-3 py-2 text-sm text-slate-200">
+              {item.detail}
             </p>
-          </div>
+          </motion.article>
         ))}
       </div>
     </section>
