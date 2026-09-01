@@ -65,7 +65,7 @@ const ProjectCard = ({ project, index }) => (
         />
         <StoreBadge
           href={project.uptodown}
-          label="Uptodown"
+          label="Download on Uptodown"
           icon={<FaExternalLinkAlt className="text-[10px] text-slate-400" />}
         />
       </div>
@@ -81,15 +81,15 @@ const ProjectCard = ({ project, index }) => (
         <FaGithub />
         Code
       </a>
-      {project.live && (
+      {(project.type === "app" ? project.downloadUrl : project.live) && (
         <a
-          href={project.live}
+          href={project.type === "app" ? project.downloadUrl : project.live}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#071018] transition hover:-translate-y-0.5"
         >
           <FaExternalLinkAlt />
-          {project.type === "app" ? "View App" : "Live Site"}
+          {project.type === "app" ? "Download App" : "Live Site"}
         </a>
       )}
     </div>

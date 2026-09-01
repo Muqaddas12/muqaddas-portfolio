@@ -14,10 +14,10 @@ export const metadata = {
     "DropLink Android",
     "DropLink Play Store",
     "DropLink Uptodown",
-    "TureScan app",
-    "TureScan document scanner",
-    "TureScan Play Store",
-    "TureScan Uptodown",
+    "True Scan app",
+    "True Scan document scanner",
+    "True Scan Play Store",
+    "True Scan Uptodown",
     "Physio website",
     "SMM World",
     "SMM World website",
@@ -31,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: "Projects | Muqaddas Malik – Android Apps & Web Products",
     description:
-      "SugResults, DropLink, TureScan, Physio, SMM World, QR Code Scanner — apps on Google Play Store & Uptodown, plus live websites built by Muqaddas Malik.",
+      "SugResults, DropLink, True Scan, Physio, SMM World, QR Code Scanner — apps on Google Play Store & Uptodown, plus live websites built by Muqaddas Malik.",
     url: "https://muqaddas-portfolio-zeta.vercel.app/projects",
   },
 };
@@ -39,4 +39,3 @@ export const metadata = {
 export default function Page() {
   return <ProjectsPage />;
 }
-

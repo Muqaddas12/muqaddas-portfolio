@@ -103,7 +103,7 @@ const FullCard = ({ project, index }) => (
           {project.uptodown && (
             <StoreBadge
               href={project.uptodown}
-              label="Uptodown"
+              label="Download on Uptodown"
               icon={<FaExternalLinkAlt className="text-[10px]" />}
               color="border-sky-500/30 bg-sky-500/10 text-sky-300 hover:border-sky-400/50"
             />
@@ -122,15 +122,15 @@ const FullCard = ({ project, index }) => (
           <FaGithub />
           View Code
         </a>
-        {project.live && (
+        {(project.type === "app" ? project.downloadUrl : project.live) && (
           <a
-            href={project.live}
+            href={project.type === "app" ? project.downloadUrl : project.live}
             target="_blank"
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[#071018] shadow-lg transition hover:-translate-y-0.5 bg-white`}
           >
             <FaExternalLinkAlt />
-            {project.type === "app" ? "View on Store" : "Live Site"}
+            {project.type === "app" ? "Download App" : "Live Site"}
           </a>
         )}
       </div>
@@ -348,4 +348,3 @@ const ProjectsPage = () => {
 };
 
 export default ProjectsPage;
-
