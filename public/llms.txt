@@ -1,0 +1,52 @@
+# Muqaddas Malik - Developer Portfolio & Apps
+
+> Full Stack Developer & Android Engineer building high-performance mobile utilities, web platforms, and user-centric software.
+
+## About Muqaddas Malik
+- **Name**: Muqaddas Malik
+- **Aliases**: Muqaddas, Muqaddas12, muqaddasmalik
+- **Role**: Full Stack Developer & Mobile App Engineer
+- **Location**: Meerut, India
+- **Portfolio**: https://muqaddas-portfolio-zeta.vercel.app
+- **GitHub**: https://github.com/Muqaddas12
+- **LinkedIn**: https://www.linkedin.com/in/muqaddas-malik-a65048229
+- **Email**: muqaddasmalik781@gmail.com
+
+## Flagship Android Applications
+- **SugResults**: Academic result checker and performance tracking Android app. Instant marksheet lookups, SGPA calculator, and PDF exports.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/sugresults
+  - Play Store: https://play.google.com/store/apps/details?id=com.mtbyown.sugresults&hl=en_IN
+  - Uptodown: https://sugresults.en.uptodown.com/android
+
+- **DropLink**: Smart file sharing and link transfer Android application built with Kotlin.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/droplink
+  - Uptodown: https://droplink.en.uptodown.com/android
+
+- **True Scan**: Document scanner app for Android with auto-border detection, color enhancements, and multi-page PDF generation.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/truescan
+  - Play Store: https://play.google.com/store/apps/details?id=com.mmbyown.truescandocumentscanner&hl=en_IN
+  - Uptodown: https://truescan-documentsscanner.en.uptodown.com/android
+
+- **Malik Electronic**: Electronics catalog and retail customer support Android app.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/malikelectronic
+  - GitHub: https://github.com/Muqaddas12/malikelectronic
+
+- **QR Code Scanner**: Zero-latency barcode and QR code reader with history export and QR code generator.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/qr-scanner
+  - Uptodown: https://qr-code-scanner-muqaddas.en.uptodown.com/android
+
+## Live Web Platforms
+- **Physio**: Physiotherapy clinic portal with online appointment booking and patient care resources.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/physio
+  - Live: https://www.abhailephysiotherapy.ie/
+
+- **SMM World**: Social media marketing service dashboard with automated delivery pipelines and wallet system.
+  - Page: https://muqaddas-portfolio-zeta.vercel.app/projects/smmworld
+  - Live: https://smmworld.vercel.app
+
+## Tech Stack
+- **Frontend**: React, Next.js, Tailwind CSS, Framer Motion, TypeScript, JavaScript
+- **Mobile**: Android (Kotlin), React Native, Expo
+- **Backend & Database**: Node.js, Express, Firebase, REST APIs
+- **Hosting & CI/CD**: Vercel, Git, GitHub Actions, Android Studio
+

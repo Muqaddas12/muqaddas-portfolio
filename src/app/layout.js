@@ -18,12 +18,23 @@ const description =
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
-  title,
-  description,
+  title: {
+    default: "Muqaddas Malik | Full Stack Developer & Android Engineer Portfolio",
+    template: "%s | Muqaddas Malik",
+  },
+  description:
+    "Official portfolio of Muqaddas Malik (Muqaddas12) — Full Stack Developer & Android Engineer. Creator of SugResults, DropLink, True Scan, Malik Electronic, Physio, and SMM World.",
   applicationName: "Muqaddas Malik Portfolio",
   authors: [{ name: "Muqaddas Malik", url: siteUrl }],
   creator: "Muqaddas Malik",
   publisher: "Muqaddas Malik",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/fav.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/fav.svg" }],
+  },
   keywords: [
     "Muqaddas Malik",
     "Muqaddas",
@@ -31,6 +42,7 @@ export const metadata = {
     "Muqaddas12",
     "Muqaddas portfolio",
     "Full Stack Developer India",
+    "Android developer",
     "React developer",
     "Next.js developer",
     "Node.js developer",
@@ -50,6 +62,8 @@ export const metadata = {
     "TureScan document scanner",
     "TureScan Play Store",
     "TureScan Uptodown",
+    "True Scan",
+    "True Scan app",
     "Physio website",
     "Physio clinic website",
     "SMM World",
@@ -70,23 +84,25 @@ export const metadata = {
   openGraph: {
     type: "profile",
     url: siteUrl,
-    title,
-    description,
+    title: "Muqaddas Malik | Full Stack Developer & Android Engineer Portfolio",
+    description:
+      "Official portfolio of Muqaddas Malik (Muqaddas12) — Full Stack Developer & Android Engineer. Creator of SugResults, DropLink, True Scan, Malik Electronic, Physio, and SMM World.",
     siteName: "Muqaddas Malik Portfolio",
     images: [
       {
-        url: "/Muqaddas%20Malik.jpg",
+        url: `${siteUrl}/Muqaddas%20Malik.jpg`,
         width: 1200,
-        height: 1500,
-        alt: "Muqaddas Malik full stack developer",
+        height: 630,
+        alt: "Muqaddas Malik Full Stack Developer & Android Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
-    images: ["/Muqaddas%20Malik.jpg"],
+    title: "Muqaddas Malik | Full Stack Developer & Android Engineer Portfolio",
+    description:
+      "Official portfolio of Muqaddas Malik — Creator of SugResults, DropLink, True Scan, Malik Electronic, Physio, and SMM World.",
+    images: [`${siteUrl}/Muqaddas%20Malik.jpg`],
   },
   robots: {
     index: true,
@@ -100,6 +116,22 @@ export const metadata = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Muqaddas Malik Portfolio",
+  url: siteUrl,
+  author: {
+    "@type": "Person",
+    name: "Muqaddas Malik",
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${siteUrl}/projects?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -107,7 +139,7 @@ const structuredData = {
   alternateName: ["Muqaddas", "muqaddasmalik", "Muqaddas12"],
   url: siteUrl,
   image: `${siteUrl}/Muqaddas%20Malik.jpg`,
-  jobTitle: "Full Stack Developer",
+  jobTitle: "Full Stack & Android Developer",
   email: "mailto:muqaddasmalik781@gmail.com",
   address: {
     "@type": "PostalAddress",
@@ -118,11 +150,67 @@ const structuredData = {
     "https://github.com/Muqaddas12",
     "https://www.linkedin.com/in/muqaddas-malik-a65048229",
     "https://muqaddas-portfolio-zeta.vercel.app",
+    "https://play.google.com/store/apps/details?id=com.mtbyown.sugresults&hl=en_IN",
+    "https://play.google.com/store/apps/details?id=com.mmbyown.truescandocumentscanner&hl=en_IN",
     "https://sugresults.en.uptodown.com/android",
     "https://droplink.en.uptodown.com/android",
     "https://truescan-documentsscanner.en.uptodown.com/android",
     "https://qr-code-scanner-muqaddas.en.uptodown.com/android",
+    "https://www.abhailephysiotherapy.ie/",
   ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Apps and Software Built by Muqaddas Malik",
+    itemListElement: [
+      {
+        "@type": "SoftwareApplication",
+        name: "SugResults",
+        operatingSystem: "Android",
+        applicationCategory: "UtilitiesApplication",
+        url: `${siteUrl}/projects/sugresults`,
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: "DropLink",
+        operatingSystem: "Android",
+        applicationCategory: "FileSharingApplication",
+        url: `${siteUrl}/projects/droplink`,
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: "True Scan",
+        operatingSystem: "Android",
+        applicationCategory: "ProductivityApplication",
+        url: `${siteUrl}/projects/truescan`,
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: "Malik Electronic",
+        operatingSystem: "Android",
+        applicationCategory: "ShoppingApplication",
+        url: `${siteUrl}/projects/malikelectronic`,
+      },
+      {
+        "@type": "WebApplication",
+        name: "Physio",
+        applicationCategory: "HealthApplication",
+        url: `${siteUrl}/projects/physio`,
+      },
+      {
+        "@type": "WebApplication",
+        name: "SMM World",
+        applicationCategory: "MarketingApplication",
+        url: `${siteUrl}/projects/smmworld`,
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: "QR Code Scanner",
+        operatingSystem: "Android",
+        applicationCategory: "UtilitiesApplication",
+        url: `${siteUrl}/projects/qr-scanner`,
+      },
+    ],
+  },
   knowsAbout: [
     "React",
     "Next.js",
@@ -134,20 +222,24 @@ const structuredData = {
     "Kotlin",
     "Android Development",
     "Mobile App Development",
+    "SugResults",
+    "DropLink",
+    "True Scan",
+    "Malik Electronic",
+    "Physio",
+    "SMM World",
     "QR Code Scanner",
-    "Document Scanner App",
-    "Social Media Marketing Panel",
     "Cybersecurity",
   ],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([structuredData, websiteSchema]) }}
         />
         {children}
       </body>

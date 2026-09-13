@@ -62,9 +62,9 @@ const FullCard = ({ project, index }) => (
             </span>
           )}
         </div>
-        <h2 className="truncate text-base sm:text-2xl font-black text-white leading-snug">
+        <h3 className="truncate text-base sm:text-2xl font-black text-white leading-snug">
           {project.title}
-        </h2>
+        </h3>
         <p className="mt-0.5 text-xs sm:text-sm font-semibold text-cyan-400">
           {project.version || "V 1.0.0"}
         </p>
