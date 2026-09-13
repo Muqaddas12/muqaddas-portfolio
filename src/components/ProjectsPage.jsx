@@ -6,6 +6,7 @@ import { useState } from "react";
 import {
   FaAndroid,
   FaArrowLeft,
+  FaArrowRight,
   FaExternalLinkAlt,
   FaGithub,
   FaGlobe,
@@ -28,161 +29,99 @@ const StoreBadge = ({ href, label, icon, color }) =>
 
 /* ─── full project card ─── */
 const FullCard = ({ project, index }) => (
-  <motion.article
-    initial={{ opacity: 0, y: 28 }}
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.12 }}
-    transition={{ duration: 0.6, delay: index * 0.06 }}
-    className="relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition hover:border-white/20 hover:bg-white/[0.065]"
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.4, delay: index * 0.05 }}
   >
-    {/* top gradient bar */}
-    <div className={`h-1.5 w-full bg-gradient-to-r ${project.accent}`} />
-
-    <div className="flex flex-1 flex-col p-6 sm:p-7">
-      {/* header row */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              {project.category}
-            </span>
-            {project.type === "app" && (
-              <span className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-emerald-300">
-                <FaAndroid /> App
-              </span>
-            )}
-            {project.type === "web" && (
-              <span className="flex items-center gap-1 rounded-full bg-sky-500/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-sky-300">
-                <FaGlobe /> Web
-              </span>
-            )}
-          </div>
-          <h2 className="mt-2 text-2xl font-black text-white sm:text-3xl">
-            {project.title}
-          </h2>
-        </div>
-        <div
-          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${project.accent} text-white`}
-        >
-          {project.type === "app" ? (
-            <FaAndroid className="text-xl" />
-          ) : (
-            <FaGlobe className="text-xl" />
-          )}
+    <Link
+      href={`/projects/${project.slug}`}
+      className="group flex flex-row items-center gap-3 sm:gap-6 rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 sm:p-6 transition hover:border-white/20 hover:bg-white/[0.065] w-full"
+    >
+      {/* Image / Icon */}
+      <div className={`h-16 w-16 sm:h-24 sm:w-24 shrink-0 rounded-xl sm:rounded-2xl bg-gradient-to-br ${project.accent} p-[1.5px] shadow-lg shadow-black/40`}>
+        <div className="flex h-full w-full items-center justify-center rounded-[10px] sm:rounded-[14px] bg-[#0d171f] overflow-hidden p-1.5 sm:p-2.5">
+          <img 
+            src={project.image || "/app-placeholder.svg"} 
+            alt={project.title} 
+            className="h-full w-full object-contain rounded-md sm:rounded-lg transition duration-300 group-hover:scale-105" 
+          />
         </div>
       </div>
 
-      {/* description */}
-      <p className="mt-4 flex-1 text-sm leading-7 text-slate-400 sm:text-base sm:leading-8">
-        {project.description}
-      </p>
-
-      {/* tech stack */}
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.tech.map((t) => (
-          <span
-            key={t}
-            className="rounded-lg bg-[#071018] px-3 py-1.5 text-xs font-medium text-slate-300"
-          >
-            {t}
+      {/* Content */}
+      <div className="flex flex-1 flex-col justify-center min-w-0 pr-2">
+        <div className="flex items-center gap-2 mb-0.5">
+          <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500">
+            {project.category}
           </span>
-        ))}
-      </div>
-
-      {/* store badges */}
-      {project.type === "app" && (
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.playStore && (
-            <StoreBadge
-              href={project.playStore}
-              label="Google Play"
-              icon={<FaAndroid />}
-              color="border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:border-emerald-400/50"
-            />
-          )}
-          {project.uptodown && (
-            <StoreBadge
-              href={project.uptodown}
-              label="Download on Uptodown"
-              icon={<FaExternalLinkAlt className="text-[10px]" />}
-              color="border-sky-500/30 bg-sky-500/10 text-sky-300 hover:border-sky-400/50"
-            />
+          {project.type === "app" && (
+            <span className="hidden md:inline-flex items-center rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-emerald-300">
+              Android
+            </span>
           )}
         </div>
-      )}
-
-      {/* action buttons */}
-      <div className="mt-6 flex flex-wrap gap-3">
-        <a
-          href={project.repo}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:text-cyan-100"
-        >
-          <FaGithub />
-          View Code
-        </a>
-        {(project.type === "app" ? project.downloadUrl : project.live) && (
-          <a
-            href={project.type === "app" ? project.downloadUrl : project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[#071018] shadow-lg transition hover:-translate-y-0.5 bg-white`}
-          >
-            <FaExternalLinkAlt />
-            {project.type === "app" ? "Download App" : "Live Site"}
-          </a>
-        )}
+        <h2 className="truncate text-base sm:text-2xl font-black text-white leading-snug">
+          {project.title}
+        </h2>
+        <p className="mt-0.5 text-xs sm:text-sm font-semibold text-cyan-400">
+          {project.version || "V 1.0.0"}
+        </p>
+        <p className="hidden sm:block mt-1.5 text-xs text-slate-400 line-clamp-1">
+          {project.description}
+        </p>
       </div>
-    </div>
-  </motion.article>
+
+      {/* Click to open button */}
+      <div className="shrink-0">
+        <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl bg-white px-3.5 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold text-[#071018] shadow-lg transition group-hover:-translate-y-0.5">
+          Open
+          <FaArrowRight className="text-[10px] sm:text-xs" />
+        </span>
+      </div>
+    </Link>
+  </motion.div>
 );
 
 /* ─── small card for additional projects ─── */
 const SmallCard = ({ project, index }) => (
-  <motion.article
-    initial={{ opacity: 0, y: 20 }}
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.5, delay: index * 0.05 }}
-    className="flex flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-5 transition hover:border-white/20 hover:bg-white/[0.06]"
+    transition={{ duration: 0.4, delay: index * 0.05 }}
   >
-    <div className={`mb-4 h-1 w-16 rounded-full bg-gradient-to-r ${project.accent}`} />
-    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-      {project.category}
-    </p>
-    <h3 className="mt-2 text-lg font-bold text-white">{project.title}</h3>
-    <p className="mt-2 flex-1 text-sm leading-6 text-slate-400">{project.description}</p>
-    <div className="mt-4 flex flex-wrap gap-2">
-      {project.tech.map((t) => (
-        <span key={t} className="rounded-md bg-[#071018] px-2.5 py-1 text-xs text-slate-300">
-          {t}
+    <Link
+      href={`/projects/${project.slug}`}
+      className="group flex flex-row items-center gap-3 sm:gap-4 rounded-xl border border-white/10 bg-white/[0.035] p-3 sm:p-5 transition hover:border-white/20 hover:bg-white/[0.06] w-full"
+    >
+      {/* Image / Icon */}
+      <div className={`h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-lg sm:rounded-xl bg-gradient-to-br ${project.accent} p-[1.5px]`}>
+        <div className="flex h-full w-full items-center justify-center rounded-[7px] sm:rounded-[10px] bg-[#0d171f] overflow-hidden p-1 sm:p-1.5">
+          <img 
+            src={project.image || "/app-placeholder.svg"} 
+            alt={project.title} 
+            className="h-full w-full object-contain rounded-sm sm:rounded-md opacity-90 transition group-hover:opacity-100 group-hover:scale-105" 
+          />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-1 flex-col justify-center min-w-0 pr-2">
+        <h3 className="truncate text-sm sm:text-lg font-bold text-white leading-snug">{project.title}</h3>
+        <p className="mt-0.5 text-[10px] sm:text-xs text-slate-500 uppercase tracking-wider">{project.category}</p>
+      </div>
+
+      {/* Open */}
+      <div className="shrink-0">
+        <span className="inline-flex items-center gap-1 rounded-lg border border-white/10 px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold text-white transition group-hover:bg-white group-hover:text-black">
+          Open
+          <FaArrowRight className="text-[9px] hidden sm:inline" />
         </span>
-      ))}
-    </div>
-    <div className="mt-4 flex flex-wrap gap-2">
-      <a
-        href={project.repo}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/30 hover:text-white"
-      >
-        <FaGithub className="text-[10px]" />
-        Code
-      </a>
-      {project.live && (
-        <a
-          href={project.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-[#071018] transition hover:-translate-y-0.5"
-        >
-          <FaExternalLinkAlt className="text-[10px]" />
-          Live
-        </a>
-      )}
-    </div>
-  </motion.article>
+      </div>
+    </Link>
+  </motion.div>
 );
 
 /* ─── filter tabs ─── */
@@ -289,7 +228,7 @@ const ProjectsPage = () => {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="flex flex-col gap-4">
             {allFeatured.map((project, index) => (
               <FullCard key={project.title} project={project} index={index} />
             ))}
@@ -305,7 +244,7 @@ const ProjectsPage = () => {
           <p className="mt-3 text-sm leading-7 text-slate-400">
             Web platforms, admin systems, e-commerce, and education tools also built and shipped.
           </p>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 flex flex-col gap-4">
             {additionalProjects.map((project, index) => (
               <SmallCard key={project.title} project={project} index={index} />
             ))}

@@ -25,13 +25,15 @@ export const metadata = {
     "QR Code Scanner Android",
     "QR Code Scanner Play Store",
     "QR Code Scanner Uptodown",
+    "Malik Electronic app",
+    "Malik Electronic Android",
     "Muqaddas12 apps",
     "Muqaddas Malik Android developer",
   ],
   openGraph: {
     title: "Projects | Muqaddas Malik – Android Apps & Web Products",
     description:
-      "SugResults, DropLink, True Scan, Physio, SMM World, QR Code Scanner — apps on Google Play Store & Uptodown, plus live websites built by Muqaddas Malik.",
+      "SugResults, DropLink, True Scan, Malik Electronic, Physio, SMM World, QR Code Scanner — apps on Google Play Store & Uptodown, plus live websites built by Muqaddas Malik.",
     url: "https://muqaddas-portfolio-zeta.vercel.app/projects",
   },
 };
